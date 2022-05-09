@@ -1,11 +1,11 @@
 import './App.css';
-import myTitle from './components/MyTitle'
+import Title from './components/Title'
 
 const title = 'Matias Perichon Calculator'
 function App() {
   return (
     <div className="App">
-      <myTitle title={title}/>
+      <Title title={title}/>
     </div>
   );
 }
