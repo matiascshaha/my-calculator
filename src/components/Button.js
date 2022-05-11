@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
-const Button = ({text,setState,inp}) => {
+const Button = ({text,handler}) => {
 
     return (
         <div className="Button">
-            <button type='button' onClick={onClickHandler({inp})}>{text}</button>
+            <button type='button' onClick={handler}>{text}</button>
         </div>
     )
 }

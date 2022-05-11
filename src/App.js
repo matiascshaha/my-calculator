@@ -10,33 +10,46 @@ const title = 'Matias Perichon Calculator'
 
 function Calculator() {
   const [outputScreenState,setOutputScreen] = useState({
-    question: 'default',
-    answer: 'default2'
+    question: '',
+    answer: '',
   })
   
   //on click events
   const handleOnClickEvents = (event) => {
     const value = event.target.innerHTML
-    var ques = outputScreenState.question
     switch(value){
         case '=': {
-            setOutputScreen({answer: 'math error'})
-            setOutputScreen({question: 'math error'})
+            if( outputScreenState.question !== '' ) 
+            {
+              var ans = ""
+              try {
+                ans = eval(outputScreenState.question)
+                setOutputScreen({answer:ans,question:outputScreenState.question})
+              }
+              catch {
+                setOutputScreen({answer:'Math Error',question:outputScreenState.question})
+              }
+
+              if (ans===undefined)
+                  setOutputScreen({answer: "Math Error",question:outputScreenState.question})
+ 
+          
+            }
+
             break
         }
         case 'Clear': {
-            setOutputScreen({question: ''})
-            setOutputScreen({answer: ''})
+            setOutputScreen({question:'',answer:''})
             break
         }
         case 'Delete': {
-            ques = ques.slice(0, -1)
-            setOutputScreen({question: {ques}})
-            break
+          var str = outputScreenState.question
+          str = str.slice(0,str.length-1)
+          setOutputScreen({question: str})
+          break
         }
         default: {
-            ques += value
-            setOutputScreen({question: ques})
+            setOutputScreen({question: outputScreenState.question=String(outputScreenState.question) + value})
             break
         }
 
@@ -48,33 +61,33 @@ function Calculator() {
       <Title title={title}/>
       <OutputScreen state={outputScreenState}/>
       <div>
-        <Button text='Clear' hadnler={handleOnClickEvents}></Button>
-        <Button text='Delete' handler={handleOnClickEvents}></Button>
-        <Button text='' handler={handleOnClickEvents}></Button>
-        <Button text='/' handler={handleOnClickEvents}></Button>
-      </div>
-      {/* <div>
-        <Button text='7' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='8' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='9' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='*' state={outputScreenState} setState={setOutputScreen}></Button>
+        <Button text='Clear' handler={handleOnClickEvents} />
+        <Button text='Delete' handler={handleOnClickEvents} />
+        <Button text='.' handler={handleOnClickEvents} />
+        <Button text='/' handler={handleOnClickEvents} />
       </div>
       <div>
-        <Button text='4' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='5' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='6' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='-' state={outputScreenState} setState={setOutputScreen}></Button>
+        <Button text='7' handler={handleOnClickEvents}/>
+        <Button text='8' handler={handleOnClickEvents}/>
+        <Button text='9' handler={handleOnClickEvents}/>
+        <Button text='*' handler={handleOnClickEvents}/>
       </div>
       <div>
-        <Button text='1' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='2' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='3' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='+' state={outputScreenState} setState={setOutputScreen}></Button>
+        <Button text='4' handler={handleOnClickEvents}/>
+        <Button text='5' handler={handleOnClickEvents}/>
+        <Button text='6' handler={handleOnClickEvents}/>
+        <Button text='-' handler={handleOnClickEvents}/>
       </div>
       <div>
-        <Button text='0' state={outputScreenState} setState={setOutputScreen}></Button>
-        <Button text='=' state={outputScreenState} setState={setOutputScreen}></Button>
-      </div>  */}
+        <Button text='1' handler={handleOnClickEvents}/>
+        <Button text='2' handler={handleOnClickEvents}/>
+        <Button text='3' handler={handleOnClickEvents}/>
+        <Button text='+' handler={handleOnClickEvents}/>
+      </div>
+      <div>
+        <Button text='0' handler={handleOnClickEvents}/>
+        <Button text='=' handler={handleOnClickEvents}/>
+      </div> 
     </div>
   );
 }
