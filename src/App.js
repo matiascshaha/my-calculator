@@ -17,6 +17,7 @@ function Calculator() {
   //on click events
   const handleOnClickEvents = (event) => {
     const value = event.target.innerHTML
+    var ques = outputScreenState.question
     switch(value){
         case '=': {
             setOutputScreen({answer: 'math error'})
@@ -29,15 +30,13 @@ function Calculator() {
             break
         }
         case 'Delete': {
-            var ques = outputScreenState.question
             ques = ques.slice(0, -1)
             setOutputScreen({question: {ques}})
             break
         }
         default: {
-            var ques2 = outputScreenState.question
-            ques2 += value
-            setOutputScreen({question: ques2})
+            ques += value
+            setOutputScreen({question: ques})
             break
         }
 
